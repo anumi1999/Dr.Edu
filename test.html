@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test Records</title>
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/test.css">
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>Test Records</header>
+            <section>
+                <div class = "clock">
+                        <div class = "hour">
+                            <div class = "hr" id = "hr"></div>
+                        </div>
+                        <div class = "min">
+                            <div class = "mn" id = "mn"></div>
+                        </div>
+                        <div class = "sec">
+                            <div class = "sc" id = "sc"></div>
+                        </div>
+                </div>
+        </section>
+        <section>
+            <div class = "container">
+                <ul class ="card">
+                    <li class ="content">
+                        Test on 31st March 
+                        <img src="img/right-arrow.png">
+                    </li>
+                    <li class ="content">
+                            Test on 31st March 
+                            <img src="img/right-arrow.png">
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <script>
+            const deg = 6;
+            const hr = document.querySelector('#hr');
+            const mn = document.querySelector('#mn');
+            const sc = document.querySelector('#sc');
+            setInterval(() => {
+                let day = new Date();
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
+            hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)` ;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+            })
+        </script>
+    </body>
+</html>
