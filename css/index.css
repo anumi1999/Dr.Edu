@@ -7,7 +7,14 @@ body{
     padding: 30px 30px;
     background: #091921;
 }
+#item{
+    display: flex;
+    flex-direction: column;
+    float: right;
+    align-items: center;
+}
 .clock{
+    margin 0;
     height: 200px;
     width: 200px;
     display: flex;
@@ -81,4 +88,76 @@ body{
     background: #fff;
     border-radius: 6px 6px 0 0;
     z-index : 12px;
+}
+
+.fa-pencil-alt{
+	float: right;
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+body{
+	font-family: Roboto;
+}
+
+li{
+	background-color: #fff;
+	height: 40px;
+	line-height: 40px;
+	color: #666;
+
+}
+
+li:nth-child(2n){
+     background-color: #f7f7f7;
+}
+
+span{
+	background-color: #e74c3c;
+	height: 40px;
+	margin-right: 20px;
+	text-align: center;
+	color: white;
+	width: 0;
+	display: inline-block;
+	transition: 0.2s linear;
+	opacity: 0;
+}
+
+li:hover span{
+	width: 40px;
+	opacity: 1.0;
+}
+
+input{
+	font-size :18px;
+	color: #2980b9;
+	background-color: #f7f7f7;
+	width: 100%;
+	padding: 13px 13px 13px 20px;
+	box-sizing: border-box;
+	border:3px solid rgba(0,0,0,0);
+}
+
+input:focus{
+	background-color: #fff;
+	border:3px solid #2980b9;
+	outline: none;
+}
+
+#container{
+    float: right;
+	width: 360px;
+	margin: 100px 50px;
+	background: #f7f7f7;
+	box-sizing:  0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.completed{
+	color:gray;
+	text-decoration: line-through;
 }
