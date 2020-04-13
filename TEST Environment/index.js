@@ -8,11 +8,11 @@ function startTimer(duration, display) {
         hours = hours< 10 ? "0" + hours : hours;  
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-        if(minutes > 60 && minutes<120){
+        if(minutes >= 60 && minutes<120){
             minutes=minutes-60;
         }
 
-        if(minutes > 120){
+        if(minutes >= 120){
             minutes=minutes-120;
         }
 
@@ -30,3 +30,4 @@ function go() {
         display = document.querySelector('#demo');
     startTimer(fiveMinutes, display);
 };
+
