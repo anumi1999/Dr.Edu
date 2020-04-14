@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Schedule
+        </title>
+        <link rel = "stylesheet" href= "css/index.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="css/todolist.css" rel="stylesheet"> 
+	    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/a909b6ae01.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>Schedule</header>
+        <section id="item">
+            <div class = "clock">
+                    <div class = "hour">
+                        <div class = "hr" id = "hr"></div>
+                    </div>
+                    <div class = "min">
+                        <div class = "mn" id = "mn"></div>
+                    </div>
+                    <div class = "sec">
+                        <div class = "sc" id = "sc"></div>
+                    </div>
+            </div>
+    
+            <div id="container">
+                <h1>To-Do List <i class="fas fa-pencil-alt"></i></h1>
+                <input type="text" placeholder="Add New Todo">
+                <ul>
+                    <li><span><i class="fas fa-trash-alt"></i></span> Get Ready for College</li>
+                    <li><span><i class="fas fa-trash-alt"></i></span> Get Roses and Bar One</li>
+                    <li><span><i class="fas fa-trash-alt"></i></span> Give Roses to Dips</li>
+                    <li><span><i class="fas fa-trash-alt"></i></span> Give Bar One To MJ</li>
+                    <li><span><i class="fas fa-trash-alt"></i></span> Bunk Classes</li>
+                    <li><span><i class="fas fa-trash-alt"></i></span> Attend Lab</li>
+                    <li><span><i class="fas fa-trash-alt"></i></span> Hangout With Mr.Robot Family</li>
+                    <li class = "lst"><span><i class="fas fa-trash-alt"></i></span> Say Goodbye ;(</li>
+                </ul>
+            </div>
+        </section>
+        
+        <script type="text/javascript" src="index.js"></script>
+                    
+        <script>
+            const deg = 6;
+            const hr = document.querySelector('#hr');
+            const mn = document.querySelector('#mn');
+            const sc = document.querySelector('#sc');
+            setInterval(() => {
+                let day = new Date();
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
+            hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)` ;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+            })
+        </script>
+    </body>
+</html>
