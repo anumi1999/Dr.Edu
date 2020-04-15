@@ -8,16 +8,19 @@ html{
 	 background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(195,43,100,1) 32%, rgba(253,29,29,1) 67%, rgba(252,176,69,1) 100%);
 }
 .container{
-	margin-top: 50px ;
+	margin-top: 120px ;
 }
 .column {
     float: left;
     width: 50%;
 }
 .header{
+	font-size: 20px;
 	text-align: center ;
 	color:#FFFFFF;
-	border-bottom: 10px solid #FFFFFF ;
+	border-bottom: 5px solid #FFFFFF ;
+	border-radius: 10px 10px ;
+	border-top: 5px solid #FFFFFF ;
 }
 .textcolumn{
 	text-align: center ;
@@ -25,28 +28,8 @@ html{
 	font-size: 32px;
 }
 #image-left{
-	display: block ;
-	margin-right: auto ;
-	margin-left: auto ;
-	width: 80%;
-	height: 45% ;
+	height: 560px ;
 }
-.upbutton{
-	background: linear-gradient(0deg, #4b6cb7 0%, #182848 100%);
-	margin: 10px ;
-	font-size:20px;
-	color:rgba(253,29,29,1);
-	border:0px ;
-	color: white;
-	font-weight: bold ;
-	border-radius: 5px 5px ;
-	display: block ;
-	margin-left: auto ;
-	margin-right: auto ; 
-}
-.upbutton:hover{
-	background: linear-gradient(180deg, #4b6cb7 0%, #182848 100%);}
-
 
 .fixed-nav-bar:before{
     content: '';
@@ -85,7 +68,7 @@ html{
 .fixed-nav-bar {
   background:rgba(6,57,84,1) ;
   position: fixed;
-  top:1px;
+  top:0px;
   left:0;
   z-index: 9999;
   width: 100%;
@@ -104,7 +87,6 @@ html{
 	float:right;
 	font-size:23px ;
 	font-weight: bold ;
-	background: transparent;
 	color:rgba(6,57,84,1);
 	border:3px solid white ;
 	border-radius: 5px 5px ;
@@ -112,7 +94,7 @@ html{
 	background: white ;
 }
 #demo{
-	margin-left: 40% ;
+	margin-left: 35% ;
 	font-size: 45px;
 	background: white ;
   	-webkit-background-clip: text;
@@ -127,4 +109,50 @@ html{
 @font-face {
   font-family: clockFont;
   src: url(digital-7.ttf);
+}
+#instruction-text{
+	float: right ;
+	font-weight: bold ;
+	width: 52% ;
+	font-size: 20px ;
+	color:white;
+	text-align: center ;
+}
+#theory{
+	width: 55% ;
+	float:right;
+}
+#figure{
+	width: 44% ;
+	float: left ;
+}
+.ques{
+  position: fixed;
+  top:65px;
+  left:0;
+  z-index: 9999;
+  width: 100%;
+  height: 50px;
+  right: 700px ;
+  border:3px solid white;
+  border-radius: 10px 10px ;
+}
+#question-text{
+	margin-left: 10px ;
+	font-size: 30px ;
+	text-transform: uppercase;
+	font-weight: bold ;
+	color:#FFFFFF;
+	padding: 5px ;
+	margin : 0px ;
+}
+#next-button{
+	float:right;
+	font-size:18px ;
+	font-weight: bold ;
+	color:black ;
+	border:3px solid white ;
+	border-radius: 5px 5px ;
+	margin:5px;
+	background: white ;
 }
