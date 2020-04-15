@@ -62,6 +62,7 @@
       var credential = firebase.auth.EmailAuthProvider.credential(email, password);
       var auth = firebase.auth();
       var currentUser = auth.currentUser;
+      window.location = "/index.html";
       
       firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
     // Handle Errors here.
@@ -71,22 +72,6 @@
     console.log(errorMessage);
 });
     });
-    async function createNewAccount() {
-    try {
-        const userAuth = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        var user = {
-            name: "Dipit",
-            phone: "95******",
-            address: "gurgaon",
-            uid: userAuth.uid,
-            email: userAuth.email
-        }
-        writeUserData(user)
-
-    } catch (error) {
-        console.log(error.message)
-    }
-}
      document.querySelector('#signout').addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
