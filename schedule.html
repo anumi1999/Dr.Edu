@@ -1,19 +1,42 @@
+
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            Schedule
-        </title>
+<html lang="en">
+<head>
+  <title>Schedule</title>
+
+  <meta charset="UTF-8">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap-grid.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css'>
+  <link rel="stylesheet" type="text/css" href="calender.css">
         <link rel = "stylesheet" href= "css/index.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <link href="css/todolist.css" rel="stylesheet"> 
-	    <script src="https://code.jquery.com/jquery-3.4.1.js"
+      <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/a909b6ae01.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <header>Schedule</header>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body class="calender">
         <section id="item">
             <div class = "clock">
                     <div class = "hour">
@@ -26,26 +49,110 @@
                         <div class = "sc" id = "sc"></div>
                     </div>
             </div>
-    
-            <div id="container">
-                <h1>To-Do List <i class="fas fa-pencil-alt"></i></h1>
-                <input type="text" placeholder="Add New Todo">
-                <ul>
-                    <li><span><i class="fas fa-trash-alt"></i></span> Get Ready for College</li>
-                    <li><span><i class="fas fa-trash-alt"></i></span> Get Roses and Bar One</li>
-                    <li><span><i class="fas fa-trash-alt"></i></span> Give Roses to Dips</li>
-                    <li><span><i class="fas fa-trash-alt"></i></span> Give Bar One To MJ</li>
-                    <li><span><i class="fas fa-trash-alt"></i></span> Bunk Classes</li>
-                    <li><span><i class="fas fa-trash-alt"></i></span> Attend Lab</li>
-                    <li><span><i class="fas fa-trash-alt"></i></span> Hangout With Mr.Robot Family</li>
-                    <li class = "lst"><span><i class="fas fa-trash-alt"></i></span> Say Goodbye ;(</li>
-                </ul>
+            <div>
+                
             </div>
         </section>
-        
-        <script type="text/javascript" src="index.js"></script>
-                    
-        <script>
+    <div class="mobile-header z-depth-1">
+      <div class="row">
+        <div class="col-2">
+          <a href="#" data-activates="sidebar" class="button-collapse" style="">
+            <i class="material-icons">menu</i>
+          </a>
+        </div>
+        <div class="col">
+          <h4>Events</h4>
+        </div>
+      </div>
+    </div>
+    <div class="main-wrapper">
+      <div class="sidebar-wrapper z-depth-2 side-nav fixed" id="sidebar">
+        <div class="sidebar-title">
+          <h4>Events</h4>
+          <h5 id="eventDayName">Date</h5>
+        </div>
+        <div class="sidebar-events" id="sidebarEvents">
+          <div class="empty-message">Sorry, no events to selected date</div>
+        </div>
+      </div>
+      <div class="content-wrapper grey lighten-3">
+        <div class="container">
+          <div class="calendar-wrapper z-depth-2">
+            <div class="header-background">
+              <div class="calendar-header">
+                <a class="prev-button" id="prev">
+                  <i class="material-icons">keyboard_arrow_left</i>
+                </a>
+                <a class="next-button" id="next">
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </a>
+                <div class="row header-title">
+                  <div class="header-text">
+                    <h3 id="month-name">February</h3>
+                    <h5 id="todayDayName">Today is Friday 7 Feb</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="calendar-content">
+              <div id="calendar-table" class="calendar-cells">
+                <div id="table-header">
+                  <div class="row">
+                    <div class="col">Mon</div>
+                    <div class="col">Tue</div>
+                    <div class="col">Wed</div>
+                    <div class="col">Thu</div>
+                    <div class="col">Fri</div>
+                    <div class="col">Sat</div>
+                    <div class="col">Sun</div>
+                  </div>
+                </div>
+                <div id="table-body" class="">
+                </div>
+              </div>
+            </div>
+            <div class="calendar-footer">
+              <div class="emptyForm" id="emptyForm">
+                <h4 id="emptyFormTitle">No events now</h4>
+                <a class="addEvent" id="changeFormButton">Add new</a>
+              </div>
+              <div class="addForm" id="addForm">
+                <h4>Add new event</h4>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input id="eventTitleInput" type="text" class="validate">
+                    <label for="eventTitleInput">Title</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input id="eventDescInput" type="text" class="validate">
+                    <label for="eventDescInput">Description</label>
+                  </div>
+                </div>
+                <div class="addEventButtons">
+                  <a class="waves-effect waves-light btn blue lighten-2" id="addEventButton">Add</a>
+                  <a class="waves-effect waves-light btn grey lighten-2" id="cancelAdd">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+      $(".button-collapse").sideNav();
+    </script>
+  </body>
+  </html>
+  <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script id="rendered-js" src="calender.js">
+   
+</script>
+ <script>
             const deg = 6;
             const hr = document.querySelector('#hr');
             const mn = document.querySelector('#mn');
@@ -60,5 +167,5 @@
             sc.style.transform = `rotateZ(${ss}deg)`;
             })
         </script>
-    </body>
+</body>
 </html>
