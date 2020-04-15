@@ -156,3 +156,10 @@ html{
 	margin:5px;
 	background: white ;
 }
+#completion-notice{
+	font-size: 54px;
+	text-align: center ;
+	color:#FFFFFF;
+	display: none ;
+	font-weight: bold ;
+}
