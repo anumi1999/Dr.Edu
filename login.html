@@ -22,12 +22,14 @@
             </div>
         </div>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
 
 <script>
@@ -47,6 +49,7 @@
   firebase.analytics();
 </script>
 <script>
+    var database = firebase.database();
     firebase.auth().onAuthStateChanged(function(user) {
       window.user = user;
       // Step 1:
@@ -64,7 +67,9 @@
       var auth = firebase.auth();
       var currentUser = auth.currentUser;
       var uid = currentUser.uid;
-      window.location = "/index.html";
+      console.log(uid);
+      writeUserData(uid,email);
+     // window.location = "/index.html";
       firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -72,14 +77,16 @@
     console.log(errorCode);
     console.log(errorMessage);
 });
-var database = firebase.database();
-function writeUserData( uid ,email ) {
-  firebase.database().ref('users/' + uid).set({
-    username: $uids,
+console.log(uid);
+console.log(uid);
+    });
+    function writeUserData( uid ,email ) {
+      console.log(uid);
+    database.ref('users/' + uid).set({
+    username: uid,
     email: email
   });
 }
-    });
      document.querySelector('#signout').addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
