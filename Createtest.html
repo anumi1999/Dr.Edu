@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test Records</title>
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/demo.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/a909b6ae01.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>Create New Test</header>
+            <section>
+                <div class = "clock">
+                        <div class = "hour">
+                            <div class = "hr" id = "hr"></div>
+                        </div>
+                        <div class = "min">
+                            <div class = "mn" id = "mn"></div>
+                        </div>
+                        <div class = "sec">
+                            <div class = "sc" id = "sc"></div>
+                        </div>
+                </div>
+        </section>
+        <section>
+            <div id="container">
+                <h1>Question Paper <i class="fas fa-pencil-alt"></i></h1>
+                <input type="text" placeholder="Add New Question!">
+            
+                <ul>
+                    
+                </ul>
+            </div>
+
+        </section>
+        <script>
+            const deg = 6;
+            const hr = document.querySelector('#hr');
+            const mn = document.querySelector('#mn');
+            const sc = document.querySelector('#sc');
+            setInterval(() => {
+                let day = new Date();
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
+            hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)` ;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+            })
+        </script>
+        <script>
+            $("ul").on("click", "li", function () {
+	// body...
+     $(this).toggleClass("completed");
+ });
+
+//delete button
+$("ul").on("click","span",function(){
+	$(this).parent().fadeOut(500,function(){
+		$(this).remove();
+	});
+     event.stopPropagation();
+});
+
+$("input[type = 'text']").keypress(function(k){
+	if(k.which === 13){
+		var todoText = $(this).val();
+		$(this).val("");
+		$("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + todoText + "</li>");
+	}
+
+});
+
+$(".fa-pencil-alt").click(function(){
+ $("input[type='text']").fadeToggle()
+});
+        </script>
+    </body>
+</html>
