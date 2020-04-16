@@ -24,15 +24,15 @@
                             <div class = "sc" id = "sc"></div>
                         </div>
                 </div>
-                <div ng-app="inputDemo" ng-controller="demoController as d">
+                <div ng-app="inputDemo" ng-controller="demoController as d" id="tim">
 
-                  <div>
+                  <!--<div>
                     {{d.seconds}} seconds
-                  </div>
+                  </div>-->
                 
                   <form class="form-inline">
                     <div class="form-group">
-                      <label for="demoTime1">Time input</label>
+                      <label id="lab" for="demoTime1">Time Duration :</label>
                       <input time-to-seconds ng-model="d.seconds" 
                              type="text" class="form-control" id="temoTime1">
                     </div>
