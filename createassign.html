@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Assignment</title>
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/demo2.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/a909b6ae01.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>Create New Assignment</header>
+        <section id="item">
+            <div class = "clock">
+                    <div class = "hour">
+                        <div class = "hr" id = "hr"></div>
+                    </div>
+                    <div class = "min">
+                        <div class = "mn" id = "mn"></div>
+                    </div>
+                    <div class = "sec">
+                        <div class = "sc" id = "sc"></div>
+                    </div>
+            </div>
+            <div class="con">
+                <h2>Submission Date:</h2>
+                <div class="select">
+                  <select id="select_day">
+                    <option>Day</option>
+                  </select>
+                </div>
+                <div class="select">
+                  <select id="select_month">
+                    <option>Month</option>
+                  </select>
+                </div>
+                <div class="select">
+                  <select id="select_year">
+                    <option>Year</option>
+                  </select>
+                </div>
+              </div>
+            <div id="bt">
+              <a href="#">Create</a>
+              <a class="loading" href="#">loading</a>
+              <svg viewBox="0 0 240 220">
+              <rect id="middle" x="20" y="100" width="200" height="60" rx="30"></rect>
+              <path id="top" d="
+                    M 60,100
+                    L 50,100
+                    C 33.4357078,100 20,113.427814 20,130
+                    L 20,130
+                    C 20,146.568541 33.4331197,160  50,160
+                    L190,160
+                    C206.570288,160 220,146.572314 220,130
+                    L220,100
+                    C220,-60 180, 80 160,100
+                    C140,120 100,160 100,160
+                  "></path>
+              <path id="bottom" d="
+                    M180,160
+                    L190,160
+                    C206.564295,160 220,146.572186 220,130
+                    L220,130
+                    C220,113.431458 206.56688,100 190,100
+                    L 50,100
+                    C33.4297125,100 20,113.435296 20,130
+                    C20,130 20,120 20,140
+                    C20,220 180,200 120,140
+                    C100,120 80,100 80,100
+                  "></path>
+              </svg>
+              <a class="feedback" href="#"></a>
+              </div>
+    </section>
+        <section>
+            <div id="container">
+                <h1>Question Set <i class="fas fa-pencil-alt"></i></h1>
+                <input type="text" placeholder="Add New Question!">
+            </div>
+            <div>
+                <ul>
+                    
+                </ul>
+            </div>
+
+        </section>
+        <script>
+            const deg = 6;
+            const hr = document.querySelector('#hr');
+            const mn = document.querySelector('#mn');
+            const sc = document.querySelector('#sc');
+            setInterval(() => {
+                let day = new Date();
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
+            hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)` ;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+            })
+        </script>
+        <script>
+            $("ul").on("click", "li", function () {
+	// body...
+     $(this).toggleClass("completed");
+ });
+
+//delete button
+$("ul").on("click","span",function(){
+	$(this).parent().fadeOut(500,function(){
+		$(this).remove();
+	});
+     event.stopPropagation();
+});
+var n =1;
+$("input[type = 'text']").keypress(function(k){
+	if(k.which === 13){
+		var todoText = $(this).val();
+		$(this).val("");
+		$("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + 'Q.' + n +' ' + todoText + "</li>"); n++;
+	}
+
+});
+
+$(".fa-pencil-alt").click(function(){
+ $("input[type='text']").fadeToggle()
+});
+        </script>
+        <script>
+           (function () {
+var resize;
+
+$("#bt").click(function () {
+if ($("#bt").hasClass("loading-start")) {
+  if ($("#bt").hasClass("loading-end")) {
+    return $("#bt").attr("class", "");
+  }
+} else {
+  setTimeout(function () {
+    return $("#bt").addClass("loading-start");
+  }, 0);
+  setTimeout(function () {
+    return $("#bt").addClass("loading-progress");
+  }, 500);
+  return setTimeout(function () {
+    return $("#bt").addClass("loading-end");
+  }, 1500);
+}
+});
+
+resize = function () {
+return $("body").css({
+  "margin-top": ~~((window.innerHeight - 260) / 2)*0 + "px" });
+
+};
+
+$(window).resize(resize);
+
+resize();
+
+}).call(this); 
+        </script>
+        <script>
+            // :: DAY
+var $select_day = $("#select_day");
+for(var i = 1; i < 32; i++) {
+  var day_number = i;
+  $('<option>')
+    .val(('0' + day_number).slice(-2))   // set the value
+    .text(i)    // set the text in in the <option>
+    .appendTo($select_day);
+}
+
+
+// :: MONTH
+var $select_month = $("#select_month");
+var options = ["January","February","March","April","May","June", "July","August","September","October","November","December"];
+for(var i = 0; i < options.length; i++) {
+  var month_number = i + 1;
+  $('<option>')
+    .val(('0' + month_number).slice(-2))          // set the value
+    .text(options[i])    // set the text in in the <option>
+    .appendTo($select_month);
+}
+
+
+// :: YEAR
+var $select_year = $("#select_year");
+
+// Get the current year
+var year = new Date().getFullYear();
+var $select_year = $('#select_year').empty();
+
+for(var i = 0; i < 99; i++) {
+  $('<option>')
+    .val(year - i)     // set the value
+    .text(year - i)    // set the text in in the <option>
+    .appendTo($select_year);
+}
+        </script>
+    </body>
+</html>
