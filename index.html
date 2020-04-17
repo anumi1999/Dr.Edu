@@ -56,7 +56,7 @@
                             <div class = "face face2">
                                     <div class = "content">
                                         <p>Check the test results of ur student.</p>
-                                        <a href="#" id = "t">Read More</a>
+                                        <a href="test.html" id = "t">Read More</a>
                                     </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                 <div class = "face face2">
                                         <div class = "content">
                                             <p>Check the assignments of ur student.</p>
-                                            <a href="#" id = "ass">Read More</a>
+                                            <a href="assignment.html" id = "ass">Read More</a>
                                         </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                     <div class = "face face2">
                                             <div class = "content">
                                                 <p>Schedule the tests of ur student.</p>
-                                                <a href="#" id = "sch">Read More</a>
+                                                <a href="schedule.html" id = "sch">Read More</a>
                                             </div>
                                     </div>
                                 </div>
@@ -103,8 +103,63 @@
                                     </div>
                                 </div>
                     </div></section>
-                   
+
                         <script type="text/javascript" src="index.js"></script>
+                        <script type="text/javascript" >
+                            var helo = sessionStorage.getItem("uid");
+                            $("ul").on("click", "li", function () {
+                                // body...
+                                 $(this).toggleClass("completed");
+                             });
+                            
+                            //delete button
+                            
+                            $("input[type = 'text']").keypress(function(k){
+                                if(k.which === 13){
+                                    var todoText = $(this).val();
+                                    $(this).val("");
+                                    $("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + todoText + "</li>");
+                                }
+                            
+                            });
+                            
+                            $(".fa-pencil-alt").click(function(){
+                             $("input[type='text']").fadeToggle()
+                            });
+                            var fb_db = firebase.database().ref("users/" + helo + "/todo/" );
+                              function updateData(){ 
+                                console.log("called");
+                                data = document.getElementById('chep').value;
+                                fb_db.child('chep/').push({
+                                    user_name : data }); 
+                                    document.location.reload();
+                            }
+                            var i = 0;
+                            var add ={};
+                            fb_db.child('chep/').once('value', function(snapshot) {
+                              snapshot.forEach(function(childSnapshot) {
+                                var childKey = childSnapshot.key;
+                                var childData = childSnapshot.val();
+                                console.log(childData.user_name);
+                                $("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + childData.user_name + "</li>");
+                              }); 
+                              $("ul").on("click","span",function(){
+                                $(this).parent().fadeOut(500,function(){
+                                  var keyy = $(this).text();
+                                  fb_db.child('chep/').once('value', function(snapshot) {
+                                  snapshot.forEach(function(childSnapshot) {
+                                    var childKey1 = childSnapshot.key;
+                                    var childData1 = childSnapshot.val();
+                                    if(childData1.user_name === keyy) {
+                                      fb_db.child('chep/' + childKey1 + "/").remove(); 
+                                    }
+                                });
+                              $(this).remove();
+                            });   
+                            });
+                            });
+                            });
+                        </script>
                     
         <script>
             const deg = 6;
@@ -121,6 +176,5 @@
             sc.style.transform = `rotateZ(${ss}deg)`;
             })
         </script>
-        <script src = "main.js"></script>
     </body>
 </html>
