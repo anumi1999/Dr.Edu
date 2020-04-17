@@ -21,7 +21,6 @@ var firebaseConfig = {
       var currentUser = auth.currentUser;
       var uid = currentUser.uid;
       console.log(uid);
-      writeUserData(uid,email);
       result.catch(function(error){
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -35,6 +34,7 @@ var firebaseConfig = {
   });
   firebase.auth().onAuthStateChanged(function(user){
     if(user){
+      writeUserData(uid,email);
       window.location.href= "/index.html";
     }
   });
