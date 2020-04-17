@@ -11,6 +11,16 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/a909b6ae01.js" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
 </head>
     </head>
     <body>
@@ -28,17 +38,10 @@
                         </div>
                 
                     <div id="container">
+                        <button onclick= "updateData()">Save</button>
                         <h1>To-Do List <i class="fas fa-pencil-alt"></i></h1>
-                        <input type="text" placeholder="Add New Todo">
-                        <ul>
-                            <li><span><i class="fas fa-trash-alt"></i></span> Get Ready for College</li>
-                            <li><span><i class="fas fa-trash-alt"></i></span> Get Roses and Bar One</li>
-                            <li><span><i class="fas fa-trash-alt"></i></span> Give Roses to Dips</li>
-                            <li><span><i class="fas fa-trash-alt"></i></span> Give Bar One To MJ</li>
-                            <li><span><i class="fas fa-trash-alt"></i></span> Bunk Classes</li>
-                            <li><span><i class="fas fa-trash-alt"></i></span> Attend Lab</li>
-                            <li><span><i class="fas fa-trash-alt"></i></span> Hangout With Mr.Robot Family</li>
-                            <li class = "lst"><span><i class="fas fa-trash-alt"></i></span> Say Goodbye ;(</li>
+                        <input type="text" id= "chep" placeholder="Add New Todo">
+                        <ul></ul>
                         </ul>
                     </div>
                 </section>
@@ -53,7 +56,7 @@
                             <div class = "face face2">
                                     <div class = "content">
                                         <p>Check the test results of ur student.</p>
-                                        <a href="#">Read More</a>
+                                        <a href="#" id = "t">Read More</a>
                                     </div>
                             </div>
                         </div>
@@ -67,7 +70,7 @@
                                 <div class = "face face2">
                                         <div class = "content">
                                             <p>Check the assignments of ur student.</p>
-                                            <a href="#">Read More</a>
+                                            <a href="#" id = "ass">Read More</a>
                                         </div>
                                 </div>
                             </div>
@@ -81,7 +84,7 @@
                                     <div class = "face face2">
                                             <div class = "content">
                                                 <p>Schedule the tests of ur student.</p>
-                                                <a href="#">Read More</a>
+                                                <a href="#" id = "sch">Read More</a>
                                             </div>
                                     </div>
                                 </div>
@@ -95,7 +98,7 @@
                                     <div class = "face face2">
                                             <div class = "content">
                                                 <p>See the student doubt</p>
-                                                <a href="#">Read More</a>
+                                                <a href="#" id = "sq">Read More</a>
                                             </div>
                                     </div>
                                 </div>
@@ -118,5 +121,6 @@
             sc.style.transform = `rotateZ(${ss}deg)`;
             })
         </script>
+        <script src = "main.js"></script>
     </body>
 </html>
