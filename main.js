@@ -50,12 +50,6 @@ function writeUserData( uid ,email ) {
  });
 
 //delete button
-$("ul").on("click","span",function(){
-	$(this).parent().fadeOut(500,function(){
-		$(this).remove();
-	});
-     event.stopPropagation();
-});
 
 $("input[type = 'text']").keypress(function(k){
 	if(k.which === 13){
