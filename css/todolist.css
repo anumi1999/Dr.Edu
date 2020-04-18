@@ -1,17 +1,20 @@
 #container{
     border-radius: 20px 20px 20px 20px;
-    padding: 20px 5px
+    padding: 20px 5px;
+    box-shadow: rgba(0,0,0,0.3);
 }
 li{
     border-radius: 5px 5px 5px 5px;
 }
 ul li:nth-child(1){
-    background: lightsalmon;
+    background: #ff105e;
+    color:white;
 }
 ul li:nth-child(2){
     background: greenyellow;
     color:black;
 }
 ul li:nth-child(3){
-    background: lightskyblue;
+    background: rgb(128, 210, 238);
+    color:white;
 }

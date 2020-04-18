@@ -34,7 +34,7 @@ header{
     background: tomato;
 }
 .card .content:nth-child(2){
-    background: greenyellow;
+    background: lightskyblue;
     color: black;
 }
 .content img{
