@@ -12,18 +12,14 @@ hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)` ;
 mn.style.transform = `rotateZ(${mm}deg)`;
 sc.style.transform = `rotateZ(${ss}deg)`;
 })
+var helo = sessionStorage.getItem("uid");
+console.log(helo);
 $("ul").on("click", "li", function () {
 // body...
 $(this).toggleClass("completed");
 });
 var n=1;
 //delete button
-$("ul").on("click","span",function(){
-$(this).parent().fadeOut(500,function(){
-$(this).remove();
-});
-event.stopPropagation();
-});
 
 $("#q").keypress(function(k){
 if(k.which === 13){
@@ -36,7 +32,7 @@ $("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + 'Q.' + n +'
 $("#temoTime1").keypress(function(k){
 if(k.which === 13){
 var todoText = $(this).val();
-$(this).val("");
+$(this).val(""); upData();
 $("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + 'Time :'  + todoText + "</li>"); n++;
 }
 
@@ -46,7 +42,39 @@ $(".fa-pencil-alt").click(function(){
 $("input[type='text']").fadeToggle()
 });
 
-
+var fb_db = firebase.database().ref("users/" + helo + "/question_paper/" );
+                              function updateData(){ 
+                                console.log("called");
+                                data = document.getElementById('q').value;
+                                fb_db.child('q/').push({
+                                    user_name : data }); 
+                                    document.location.reload();
+                            }
+                            var i = 0;
+                            var add ={};
+                            fb_db.child('q/').once('value', function(snapshot) {
+                              snapshot.forEach(function(childSnapshot) {
+                                var childKey = childSnapshot.key;
+                                var childData = childSnapshot.val();
+                                console.log(childData.user_name);
+                                $("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + childData.user_name + "</li>");
+                              }); 
+                              $("ul").on("click","span",function(){
+                                $(this).parent().fadeOut(500,function(){
+                                  var keyy = $(this).text();
+                                  fb_db.child('q/').once('value', function(snapshot) {
+                                  snapshot.forEach(function(childSnapshot) {
+                                    var childKey1 = childSnapshot.key;
+                                    var childData1 = childSnapshot.val();
+                                    if(childData1.user_name === keyy) {
+                                      fb_db.child('q/' + childKey1 + "/").remove(); 
+                                    }
+                                });
+                              $(this).remove();
+                            });   
+                            });
+                            });
+                            });
 (function () {
 angular.module('inputDemo', ['timeToSeconds']).
 controller('demoController', function () {
@@ -211,4 +239,21 @@ resize();
 
 }).call(this);
 
-
+var fb_db = firebase.database().ref("users/" + helo + "/question_paper/" );
+                              function upData(){ 
+                                console.log("called");
+                                data = total;
+                                fb_db.child('q/time/').push({
+                                    user_name : data }); 
+                                    document.location.reload();
+                            }
+                            var i = 0;
+                            var add ={};
+                            fb_db.child('q/time/').once('value', function(snapshot) {
+                              snapshot.forEach(function(childSnapshot) {
+                                var childKey = childSnapshot.key;
+                                var childData = childSnapshot.val();
+                                console.log(childData.user_name);
+                                $("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + childData.user_name + "</li>");
+                              }); 
+                            });

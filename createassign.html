@@ -9,6 +9,17 @@
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous"></script>
       <script src="https://kit.fontawesome.com/a909b6ae01.js" crossorigin="anonymous"></script>
+      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
+  </head>
     </head>
     <body>
         <header>Create New Assignment</header>
@@ -78,7 +89,8 @@
         <section>
             <div id="container">
                 <h1>Question Set <i class="fas fa-pencil-alt"></i></h1>
-                <input type="text" placeholder="Add New Question!">
+                <button onclick= "updateData()">Save</button>
+                <input type="text" id = "assi" placeholder="Add New Question!">
             </div>
             <div>
                 <ul>
@@ -87,6 +99,7 @@
             </div>
 
         </section>
+        <script type="text/javascript" src="index.js"></script>
         <script>
             const deg = 6;
             const hr = document.querySelector('#hr');
@@ -103,18 +116,14 @@
             })
         </script>
         <script>
+            var helo = sessionStorage.getItem("uid");
             $("ul").on("click", "li", function () {
 	// body...
      $(this).toggleClass("completed");
  });
 
 //delete button
-$("ul").on("click","span",function(){
-	$(this).parent().fadeOut(500,function(){
-		$(this).remove();
-	});
-     event.stopPropagation();
-});
+
 var n =1;
 $("input[type = 'text']").keypress(function(k){
 	if(k.which === 13){
@@ -128,6 +137,39 @@ $("input[type = 'text']").keypress(function(k){
 $(".fa-pencil-alt").click(function(){
  $("input[type='text']").fadeToggle()
 });
+var fb_db = firebase.database().ref("users/" + helo + "/assignment/" );
+                              function updateData(){ 
+                                console.log("called");
+                                data = document.getElementById('assi').value;
+                                fb_db.child('q/').push({
+                                    user_name : data }); 
+                                    document.location.reload();
+                            }
+                            var i = 0;
+                            var add ={};
+                            fb_db.child('q/').once('value', function(snapshot) {
+                              snapshot.forEach(function(childSnapshot) {
+                                var childKey = childSnapshot.key;
+                                var childData = childSnapshot.val();
+                                console.log(childData.user_name);
+                                $("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + childData.user_name + "</li>");
+                              }); 
+                              $("ul").on("click","span",function(){
+                                $(this).parent().fadeOut(500,function(){
+                                  var keyy = $(this).text();
+                                  fb_db.child('q/').once('value', function(snapshot) {
+                                  snapshot.forEach(function(childSnapshot) {
+                                    var childKey1 = childSnapshot.key;
+                                    var childData1 = childSnapshot.val();
+                                    if(childData1.user_name === keyy) {
+                                      fb_db.child('q/' + childKey1 + "/").remove(); 
+                                    }
+                                });
+                              $(this).remove();
+                            });   
+                            });
+                            });
+                            });
         </script>
         <script>
            (function () {

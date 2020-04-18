@@ -23,7 +23,7 @@ var firebaseConfig = {
     var currentUser = auth.currentUser;
     var uid = currentUser.uid;
     sessionStorage.setItem("uid",uid);
-    writeUserData(uid,email);
+   // writeUserData(uid,email);
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
 
         // Handle Errors here.
@@ -53,6 +53,3 @@ var firebaseConfig = {
             //  If there is a user, log out out user details for debugging purposes.
           });
   });
-
-
-

@@ -20,7 +20,18 @@ var firebaseConfig = {
       var auth = firebase.auth();
       var currentUser = auth.currentUser;
       var uid = currentUser.uid;
+      var user = firebase.auth().currentUser;
+      var credential;
+      
+      // Prompt the user to re-provide their sign-in credentials
+      
+      user.reauthenticateWithCredential(credential).then(function() {
+        // User re-authenticated.
+      }).catch(function(error) {
+        // An error happened.
+      });
       console.log(uid);
+      window.location.href= "/index.html";
       result.catch(function(error){
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -34,8 +45,10 @@ var firebaseConfig = {
   });
   firebase.auth().onAuthStateChanged(function(user){
     if(user){
+      var auth = firebase.auth();
+      var currentUser = auth.currentUser;
+      var uid = currentUser.uid;
       writeUserData(uid,email);
-      window.location.href= "/index.html";
     }
   });
 function writeUserData( uid ,email ) {
@@ -64,7 +77,8 @@ $(".fa-pencil-alt").click(function(){
  $("input[type='text']").fadeToggle()
 });
 var fb_db = firebase.database().ref();
-  function updateData(){
+  function updateData(){ 
+    console.log("called");
   data = document.getElementById('chep').value;
 	fb_db.child("users/" + uid + "/todo/" ).push({
 		user_name : data }); 

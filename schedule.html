@@ -17,6 +17,20 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/a909b6ae01.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/a909b6ae01.js" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
 <script>
   window.console = window.console || function(t) {};
 </script>
@@ -114,7 +128,7 @@
             <div class="calendar-footer">
               <div class="emptyForm" id="emptyForm">
                 <h4 id="emptyFormTitle">No events now</h4>
-                <a class="addEvent" id="changeFormButton">Add new</a>
+                <a class="addEvent" id="changeFormButton" >Add new</a>
               </div>
               <div class="addForm" id="addForm">
                 <h4>Add new event</h4>
@@ -129,7 +143,7 @@
                   </div>
                 </div>
                 <div class="addEventButtons">
-                  <a class="waves-effect waves-light btn blue lighten-2" id="addEventButton">Add</a>
+                  <a class="waves-effect waves-light btn blue lighten-2" id="addEventButton" onclick="updateData()">Add</a>
                   <a class="waves-effect waves-light btn grey lighten-2" id="cancelAdd">Cancel</a>
                 </div>
               </div>
@@ -166,6 +180,31 @@
             mn.style.transform = `rotateZ(${mm}deg)`;
             sc.style.transform = `rotateZ(${ss}deg)`;
             })
+        </script>
+        <script>
+
+            var fb_db = firebase.database().ref("users/" + helo + "/sch/" );
+            function updateData(){ 
+                                console.log("called");
+                                data = document.getElementById('eventTitleInput').value;
+                                data1 = document.getElementById('eventDescInput').value;
+                                fb_db.child('chep/').push({
+                                    title : data ,
+                                    desc : data1
+                                  }); 
+                                    document.location.reload();
+                            }
+                            var add ={};
+                            fb_db.child('chep/').once('value', function(snapshot) {
+                              snapshot.forEach(function(childSnapshot) {
+                                var childKey = childSnapshot.key;
+                                var childData = childSnapshot.val();
+                                console.log(childData.title);
+                                $("ul").append("<li><span><i class='fas fa-trash-alt'></i></span>" + childData.title+ "</li>");
+                              }); 
+                            });
+
+
         </script>
 </body>
 </html>
