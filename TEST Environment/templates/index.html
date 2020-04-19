@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Little| TEST ENVIRONMENT </title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='index.css')}}">
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
+		<script src="{{url_for('static',filename='index.js')}}"></script>
+</head>
+<body>
+	<div id="completion-notice"> THANK YOU ! THE TEST IS NOW SUBMITTED </div>
+	<div id="body">
+<div class="fixed-nav-bar">
+	<img id="head-img" width="70px" height="30px" src="blackboard.svg"/>
+	<span id="head-text">LITLE</span>
+	<span id="demo">3:00:00</span>
+	<button id="start-button" onclick="go()">START TEST!</button>
+</div>
+<div class="ques">
+	<img id="head-img" width="70px" height="30px" src="question.svg"/>
+	<span id="question-text"></span>
+	<button id="next-button" onclick="xyz()">NEXT></button>
+</div>
+<div class="container">
+	<div class="column" id="figure">
+		<h1 class="header"> FIGURE</h1> 
+		<span id="instruction-text">
+			GO TO LITLE APP ON YOUR PHONE TO SCAN FIGURE
+		</span> 
+		<img src="landing_page.png" id="image-left">
+	</div>
+	<div class="column" id="theory">
+		<h1 class="header"> THEORY </h1>
+		<form action="/test" method="post" enctype="multipart/form-data" id="abc" >
+			<textarea name="content" id="editor">
+        </textarea>
+			<input type="submit">
+		</form>
+	</div>
+</div>
+</div>
+<script src="{{url_for('static',filename='index.js')}}"></script>
+<script type="text/javascript">
+	CKEDITOR.replace('editor', {
+      width: '100%',
+      height: 495,
+      uiColor :'#679df5' , 
+      toolbarGroups :[
+		{ "name": 'clipboard', "groups": [ 'clipboard', 'undo' ] },
+		{ "name": 'editing', "groups": [ 'find', 'selection', 'spellchecker', 'editing' ] },
+		{ "name": 'links', "groups": [ 'links' ] },
+		{ "name": 'insert', "groups": [ 'insert' ] },
+		{ "name": 'forms', "groups": [ 'forms' ] },
+		{ "name": 'tools', "groups": [ 'tools' ] },
+		{ "name": 'document', "groups": [ 'mode', 'document', 'doctools' ] },
+		{ "name": 'others', "groups": [ 'others' ] },
+		'/',
+		{ "name": 'basicstyles', "groups": [ 'basicstyles', 'cleanup' ] },
+		{ "name": 'paragraph', "groups": [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+		{ "name": 'styles', "groups": [ 'styles' ] },
+		{ "name": 'colors', "groups": [ 'colors' ] },
+		{ "name": 'about', "groups": [ 'about' ] }
+	],
+	removeButtons :'Underline,Anchor,Link,Unlink,Image,Source,About,Cut,Copy,Paste,PasteText,PasteFromWord'
+    });
+</script>
+<script>
+	var firebaseConfig = {
+    apiKey: "AIzaSyB-W2AktdEtM7z_KHSWXXT_3PoBoWFdubM",
+    authDomain: "dredu-71835.firebaseapp.com",
+    databaseURL: "https://dredu-71835.firebaseio.com",
+    projectId: "dredu-71835",
+    storageBucket: "dredu-71835.appspot.com",
+    messagingSenderId: "1010179971420",
+    appId: "1:1010179971420:web:d2fc28ac5634b8ee8a0999",
+    measurementId: "G-19Z5Q66FHX"
+  };  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+    var database = firebase.database();
+	var uid = sessionStorage.getItem("uid");
+	var reff = database.ref('users/' + uid + "/question_paper/" );
+  					
+					function xyz(){
+						console.log(uid);
+						reff.child('q/').once('value', function(snapshot) {
+								console.log("called");
+                              snapshot.forEach(function(childSnapshot) {
+                                var childKey = childSnapshot.key;
+                                var childData = childSnapshot.val();
+                                console.log(childData.user_name);
+                                var question = childData;
+                                document.getElementById('question-text').innerText = childData.user_name;
+                              }); 
+					});
+					}
+</script>
+</body>
+</html>
+
+ 
