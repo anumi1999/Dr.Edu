@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quiz-Generator</title>
+<link rel="stylesheet" href="css/demo3.css">
+<style>
+/* Global */
+body {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+#quizConfig {
+ justify-content: center;
+ margin: 20px;
+}
+#lb{
+    font-size: 20px;
+    color: blueviolet;
+    margin-bottom: 20px;
+}
+#rt{
+  padding: 10px;
+}
+#row{
+    margin-left: 50px;
+}
+#ro{
+    margin-left: 200px;
+}
+#title.validate{
+  width: 500px;
+}
+#first_name {
+  margin-bottom: 20px;
+  margin: 5px;
+  padding: 5px;
+}
+
+#submitBtn {
+  margin: 0;
+  padding: 0;
+}
+
+#result {
+  margin-top: 100px;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+<link rel="stylesheet" href="style.css">
+<title>Quiz Generator</title>
+</head>
+<body>
+    <header>Quiz Generator</header>
+<div class = "clock">
+    <div class = "hour">
+        <div class = "hr" id = "hr"></div>
+    </div>
+    <div class = "min">
+        <div class = "mn" id = "mn"></div>
+    </div>
+    <div class = "sec">
+        <div class = "sc" id = "sc"></div>
+    </div>
+</div>
+<div class="container" id="container">
+<div id="quizConfig">
+<form class="col s12">
+<div id="row">
+<div class="input-field col m6 s12" id="rt">
+<input placeholder="1 - 100" id="qTotal" type="number" class="validate">
+<label for="questions" id="lb">Number of questions to create</label>
+</div>
+</div>
+</form>
+
+<div class="col s6">
+<a id="generateBtn" class="waves-effect waves-light btn-small">Generate Form</a>
+</div>
+</div>
+
+<div id="formContainer" class="row hide">
+<form id="quizForm" class="col s12">
+
+<div id="ro">
+<div class="input-field col s12 m6" id="rt">
+<input id="title" placeholder="Enter the question" type="text" class="validate">
+<label for="question_title" id="lb">Question Title</label>
+</div>
+</div>
+
+<div class="row">
+<div class="input-field col s12 m6" id="rt">
+<input id="input1" placeholder="Enter answer" type="text" class="validate">
+<label id="lb">Option A</label>
+</div>
+</div>
+
+<div class="row">
+<div class="input-field col s12 m6" id="rt">
+<input id="input2" placeholder="Enter answer" type="text" class="validate">
+<label id="lb">Option B</label>
+</div>
+</div>
+
+<div class="row">
+<div class="input-field col s12 m6" id="rt">
+<input id="input3" placeholder="Enter answer" type="text" class="validate">
+<label id="lb">Option C</label>
+</div>
+</div>
+
+<div class="row">
+<div class="input-field col s12 m6 "id="rt">
+<input id="input4" placeholder="Enter answer" type="text" class="validate">
+<label id="lb">Option D</label>
+</div>
+</div>
+
+<div class="row">
+<div class="input-field col s12 m6" id="rt">
+<input id="correctValue" placeholder="Enter the correct answer. A,B,C,D?" type="text" class="validate">
+<label id="lb">Correct Answer</label>
+</div>
+</div>
+
+<div id="submitBtn" class="col s6">
+<a id="submit" class="waves-effect waves-light btn-small">Add to bank</a>
+</div>
+</form>
+</div>
+
+<form id="quiz" class="hide" action="#">
+<h5 id="qTitle"></h5>
+
+<p>
+<label>
+ <input id="check1" class="with-gap" type="radio" name='choices' value="A" />
+<span id="option1"></span>
+</label>
+</p>
+
+<p>
+<label>
+<input id="check2" class="with-gap" type="radio" name='choices' value="B" />
+<span id="option2"></span>
+</label>
+</p>
+
+<p>
+<label>
+<input id="check3" class="with-gap" type="radio" name='choices' value="C" />
+<span id="option3"></span>
+</label>
+</p>
+<a id="submitAnswer" class="waves-effect waves-light btn-small">Next Question</a>
+</form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="generate.js"></script>
+</body>
+</html>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script id="rendered-js">
+// Global variables
+// UI Variables
+const quiz = document.getElementById('quiz');
+const generateBtn = document.getElementById('generateBtn');
+const quizConfig = document.getElementById('quizConfig');
+const qTotal = document.getElementById('qTotal');
+const total = qTotal.value;
+const form = document.getElementById('quizForm');
+const submit = document.getElementById('submit');
+const submitAnswer = document.getElementById('submitAnswer');
+
+// Position Variables
+let pos = 1;
+let quizPos = 1;
+let position = 0;
+let incorrectPos = 0;
+
+// Check box variables
+const check1 = document.getElementById("check1");
+const check2 = document.getElementById("check2");
+const check3 = document.getElementById("check3");
+
+// Quiz data
+const questions = [];
+
+// Quiz score
+let correct = 0;
+let incorrect = 0;
+
+// Generate questions & options for quiz
+generateBtn.addEventListener('click', e => {
+  // Check input fields have value
+  if (qTotal && qTotal.value) {
+    clearConfig();
+    renderForm();
+  } else {
+    alert('Input fields empty');
+  }
+});
+
+function storeData() {
+  // Get values
+  const title = document.getElementById('title').value;
+  const input1 = document.getElementById('input1').value;
+  const input2 = document.getElementById('input2').value;
+  const input3 = document.getElementById('input3').value;
+  const value = document.getElementById('correctValue').value;
+  // Append to array
+  questions.push([title, input1, input2, input3, value]);
+  // Increase position in form
+  pos++;
+  console.log(pos);
+  console.log(qTotal.value);
+  // Reset form
+  reset();
+  console.log(questions);
+}
+
+// Submit quiz data to arrays
+submit.addEventListener('click', e => {
+  if (pos < qTotal.value) {
+    storeData();
+
+  } else if (pos == qTotal.value) {
+    // Start quiz
+    storeData();
+    clearForm();
+    displayQuiz();
+    renderQuiz();
+
+  } else {
+    // Error Handler
+    alert('Display error');
+  }
+});
+
+// Render quiz
+function renderQuiz() {
+  const qTitle = document.getElementById('qTitle');
+  const option1 = document.getElementById('option1');
+  const option2 = document.getElementById('option2');
+  const option3 = document.getElementById('option3');
+
+  // Question Title
+  qTitle.innerHTML = questions[position][0];
+  // Correct Answer
+  option1.innerHTML = questions[position][1];
+  // Incorrect Answers
+  option2.innerHTML = questions[position][2];
+  option3.innerHTML = questions[position][3];
+}
+
+// Check answers
+function checkAnswer() {
+  // Get group name
+  choices = document.getElementsByName('choices');
+  // Loop through options to check for selected answer
+  for (var i = 0; i < choices.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+    // Get the value of selected answer
+    if (choices[i].checked) {
+      choice = choices[i].value;
+    }
+  }
+  // Check if value = correct answer
+  window.CP.exitedLoop(0);if (choice == questions[position][4]) {
+    correct++;
+  } else {
+    incorrect++;
+  }
+  position++;
+  quizPos++;
+}
+
+// Sumbit Answer
+submitAnswer.addEventListener('click', e => {
+  if (quizPos >= questions.length) {
+    checkAnswer();
+    displayResults();
+  } else {
+    checkAnswer();
+    clearQuiz();
+    clearCheckbox();
+    renderQuiz();
+  }
+});
+
+// Display results from quiz
+function displayResults() {
+  quiz.innerHTML = '';
+  container.innerHTML = '<h5 id="result" class="center">Results ' + correct + '/ ' + questions.length + '</h5>';
+}
+
+// Event Listener - Add checked status
+check1.addEventListener('click', e => {check1.checked = true;});
+check2.addEventListener('click', e => {check2.checked = true;});
+check3.addEventListener('click', e => {check3.checked = true;});
+
+// Clear configuration
+const clearConfig = () => {quizConfig.innerHTML = ' ';};
+// Clear form
+const clearForm = () => {form.classList.add('hide');};
+// Clear quiz
+const clearQuiz = () => {option1.innerHTML = '';option2.innerHTML = '';option3.innerHTML = '';};
+// Display Quiz
+const displayQuiz = () => {quiz.classList.remove('hide');};
+// Clear checkboxs
+const clearCheckbox = () => {check1.checked = false;check2.checked = false;check3.checked = false;};
+// Render Form
+const renderForm = () => {
+  const renderForm = document.getElementById('formContainer');
+  formContainer.classList.remove('hide');
+};
+
+// Reset form
+function reset() {
+  form.reset();
+  const labels = [...document.querySelectorAll("label")];
+  labels.forEach(label => {
+    label.classList.add('active');
+  });
+}
+//# sourceURL=pen.js
+    </script>
+    <script src='testass.js' id="rendered-js" ></script>
+</body>
+</html>
